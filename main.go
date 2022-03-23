@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+
+	"github.com/joho/godotenv"
 )
 
 
@@ -29,7 +31,7 @@ func loadPage(title string) (*Page, error) {
 	return &Page{Title: title, Body: body}, nil
 }
 
-var templates = template.Must(template.ParseFiles("edit.html", "view.html"))
+var templates = template.Must(template.ParseFiles("/gowiki/edit.html", "/gowiki/view.html"))
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	err := templates.ExecuteTemplate(w, tmpl+".html", p)
@@ -79,9 +81,25 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func main() {
+	env := os.Getenv("GO_ENV")
+	if "" == env {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+		log.Print("Server starting at localhost:" + port)
+
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
 }
