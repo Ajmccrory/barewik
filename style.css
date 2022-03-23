@@ -1,0 +1,104 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --light-blue: #3d5954;
+  --light-navy: #637a76;
+  --dark-grey: #777;
+  --light-grey: #dadce0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  
+ 
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.button {
+  border: 2px solid #b1bcba;
+  color: var(--light-grey);
+  border-radius: 4px;
+  padding: 6px 24px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+a.button:hover {
+  text-decoration: none;
+  background-color: var(--light-navy);
+  color: var(--light-blue);
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--light-blue);
+  padding: 5px 10px;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  color: var(--light-grey);
+}
+
+form {
+  height: calc(100% - 10px);
+}
+
+
+.title {
+  margin-bottom: 15px;
+}
+
+
+.metadata {
+  display: flex;
+  color: var(--light-navy);
+  font-size: 14px;
+}
+
+
+@media screen and (max-width: 550px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .github-button {
+    display: none;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
